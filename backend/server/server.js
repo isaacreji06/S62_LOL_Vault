@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
+let PORT=8080
 app.get('/ping', (req, res) => {
     res.send('ping');
 });
-app.listen(8080, () => {
-    console.log("the server is running on the port 8080");
+app.listen(PORT, () => {
+    console.log(`the server is running on the port ${PORT}`);
 });
