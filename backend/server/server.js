@@ -1,6 +1,11 @@
 const express = require('express');
+if (process.env.NODE_ENV!=='PRODUCTION'){
+    require('dotenv').config({
+        path:'../config/.env',
+    });
+}
 const app = express();
-let PORT=8080
+const PORT=process.env.PORT
 app.get('/ping', (req, res) => {
     res.send('ping');
 });
