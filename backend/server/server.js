@@ -9,8 +9,6 @@ const app = express();
 const PORT=process.env.PORT
 const MONGODB_URL=process.env.MONGODB_URL
 let databaseStatus=""
-console.log(PORT)
-console.log(MONGODB_URL)
 mongoose.connect(MONGODB_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true
