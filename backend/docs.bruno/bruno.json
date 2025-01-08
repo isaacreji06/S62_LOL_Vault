@@ -1,0 +1,9 @@
+{
+    "version": "1",
+    "name": "S62_LOL_Vault",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
