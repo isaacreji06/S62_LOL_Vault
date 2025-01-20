@@ -48,3 +48,6 @@ LOL Vault is fun and technically challenging, combining real-time interactivity 
 
 ## github deployment link
 https://s62-lol-vault.onrender.com
+
+## frontend deployment link
+https://s62-lol-vault.pages.dev
