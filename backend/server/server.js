@@ -5,12 +5,14 @@ require('dotenv').config({
 const mongoose = require('mongoose');
 const User = require('../Schema/userSchema.js');
 const app = express();
+const cors=require('cors')
 const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
 const userRoute=require('../routes/userRoute.js')
 let databaseStatus = '';
 app.use(express.json());
-app.use('/',userRoute)
+app.use('/user',userRoute)
+app.use(cors())
 mongoose
     .connect(MONGODB_URL)
     .then(() => {

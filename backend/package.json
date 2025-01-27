@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"cd server && nodemon node server.js"
+    "dev": "cd server && nodemon node server.js"
   },
   "author": "Isaac",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongodb": "^6.12.0",
