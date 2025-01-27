@@ -3,16 +3,20 @@ const mongoose = require('mongoose');
 const User = require('../Schema/userSchema.js');
 const router = express.Router();
 
-router.get('/user', (req, res) => {
+router.get('/get-user', (req, res) => {
     User.find()
-        .then((users) => {
-            res.status(200).json(users);
+    .then((users) => {
+    if (users.length > 0) {
+         res.status(200).json({ message: users[0] });
+    } else {
+        res.status(404).json({ message: 'No users found' });
+    }
         })
         .catch((err) => {
             res.status(500).json({ message: 'An error occurred', error: err.message });
         });
 });
-router.post('/user', (req, res) => {
+router.post('/create-user', (req, res) => {
     const userData = new User(req.body);
     userData
         .save()
@@ -21,7 +25,7 @@ router.post('/user', (req, res) => {
             res.status(500).json({ message: 'An error occurred', error: error.message });
         });
 });
-router.put('/user/:id', (req, res) => {
+router.put('/update-user/:id', (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;
     User.findByIdAndUpdate(id, updatedData, { new: true })
@@ -35,7 +39,7 @@ router.put('/user/:id', (req, res) => {
             res.status(500).json({ message: 'An error occurred', error: err.message });
         });
 });
-router.delete('/user/:id', (req, res) => {
+router.delete('/delete-user/:id', (req, res) => {
     const id = req.params.id;
 
     User.findByIdAndDelete(id)
