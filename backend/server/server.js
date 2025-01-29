@@ -10,9 +10,9 @@ const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
 const userRoute=require('../routes/userRoute.js')
 let databaseStatus = '';
+app.use(cors())
 app.use(express.json());
 app.use('/user',userRoute)
-app.use(cors())
 mongoose
     .connect(MONGODB_URL)
     .then(() => {

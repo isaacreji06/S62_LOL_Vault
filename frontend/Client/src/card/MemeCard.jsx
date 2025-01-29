@@ -9,7 +9,7 @@ function MemeCard() {
       .then(response => response.json())
       .then(data => {
         if (data.message) {
-          setData(data.message); // Set the first user's data
+          setData(data.message);
         }
       })
       .catch(error => console.error('Error fetching data:', error));
@@ -19,14 +19,13 @@ function MemeCard() {
     <div>
       <div className='bg-white h-44 w-44'>
         <img src={image} alt="" className='h-32 w-44' />
-        {/* Conditional Rendering: Only render the username and createdAt if data is not null */}
         {data ? (
           <>
             <h6 className="text-center">username: {data.username}</h6>
             <h6 className="text-center">uploaded at: {data.createdAt}</h6>
           </>
         ) : (
-          <p>Loading...</p>  // Show loading message while data is being fetched
+          <p>Loading...</p>
         )}
       </div>
     </div>
