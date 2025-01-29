@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import image from "../assets/meme.jpg";
+import image from '../../assets/meme.jpg';
 
 function MemeCard() {
   const [data, setData] = useState(null);

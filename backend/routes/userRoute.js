@@ -2,6 +2,7 @@ const express=require('express')
 const mongoose = require('mongoose');
 const User = require('../Schema/userSchema.js');
 const router = express.Router();
+const upload=require('../middlewares/multer.js')
 
 router.get('/get-user', (req, res) => {
     User.find()
@@ -16,15 +17,26 @@ router.get('/get-user', (req, res) => {
             res.status(500).json({ message: 'An error occurred', error: err.message });
         });
 });
-router.post('/create-user', (req, res) => {
-    const userData = new User(req.body);
-    userData
-        .save()
-        .then(() => res.status(201).json({ message: 'User added successfully!' }))
-        .catch((error) => {
-            res.status(500).json({ message: 'An error occurred', error: error.message });
+router.post('/create-user', upload.single("profilePicture"), async (req, res) => {
+    try {
+        // Check if an image was uploaded
+        const profilePictureUrl = req.file
+            ? `http://localhost:8080/uploads/${req.file.filename}`
+            : undefined;
+        const userData = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            bio: req.body.bio,
+            profilePicture: profilePictureUrl || undefined, 
         });
+        await userData.save();
+        res.status(201).json({ message: 'User added successfully!', user: userData });
+    } catch (error) {
+        res.status(500).json({ message: 'An error occurred', error: error.message });
+    }
 });
+
 router.put('/update-user/:id', (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;

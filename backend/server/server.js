@@ -4,6 +4,7 @@ require('dotenv').config({
 });
 const mongoose = require('mongoose');
 const User = require('../Schema/userSchema.js');
+const path=require('path')
 const app = express();
 const cors=require('cors')
 const PORT = process.env.PORT;
@@ -13,6 +14,7 @@ let databaseStatus = '';
 app.use(cors())
 app.use(express.json());
 app.use('/user',userRoute)
+app.use('/uploads', express.static(path.join(__dirname, "../uploads")))
 mongoose
     .connect(MONGODB_URL)
     .then(() => {
