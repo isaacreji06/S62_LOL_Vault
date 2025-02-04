@@ -3,17 +3,20 @@ require('dotenv').config({
     path: '../config/.env',
 });
 const mongoose = require('mongoose');
-const User = require('../Schema.js');
+const User = require('../Schema/userSchema.js');
+const path=require('path')
 const app = express();
+const cors=require('cors')
 const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
+const userRoute=require('../routes/userRoute.js')
 let databaseStatus = '';
+app.use(cors())
 app.use(express.json());
+app.use('/user',userRoute)
+app.use('/uploads', express.static(path.join(__dirname, "../uploads")))
 mongoose
-    .connect(MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(MONGODB_URL)
     .then(() => {
         databaseStatus = 'Connected to the database successfully';
     })
@@ -27,52 +30,7 @@ app.get('/', (req, res) => {
 app.get('/ping', (req, res) => {
     res.send('ping');
 });
-app.get('/user', (req, res) => {
-    User.find()
-        .then((users) => {
-            res.status(200).json(users);
-        })
-        .catch((err) => {
-            res.status(500).json({ message: 'An error occurred', error: err.message });
-        });
-});
-app.post('/user', (req, res) => {
-    const userData = new User(req.body);
-    userData
-        .save()
-        .then(() => res.status(201).json({ message: 'User added successfully!' }))
-        .catch((error) => {
-            res.status(500).json({ message: 'An error occurred', error: error.message });
-        });
-});
-app.put('/user/:id', (req, res) => {
-    const id = req.params.id;
-    const updatedData = req.body;
-    User.findByIdAndUpdate(id, updatedData, { new: true })
-        .then((updatedItem) => {
-            if (!updatedItem) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.status(200).json({ message: 'User data updated successfully', updatedItem });
-        })
-        .catch((err) => {
-            res.status(500).json({ message: 'An error occurred', error: err.message });
-        });
-});
-app.delete('/user/:id', (req, res) => {
-    const id = req.params.id;
 
-    User.findByIdAndDelete(id)
-        .then((deletedItem) => {
-            if (!deletedItem) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.status(200).json({ message: 'User deleted successfully', deletedItem });
-        })
-        .catch((err) => {
-            res.status(500).json({ message: 'An error occurred', error: err.message });
-        });
-});
 app.listen(PORT, () => {
-    console.log(`The server is running on port ${PORT}`);
+    console.log(`The server is running on port http://localhost:${PORT}`);
 });
