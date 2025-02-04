@@ -16,7 +16,7 @@ router.get('/get-user', (req, res) => {
         .catch((err) => {
             res.status(500).json({ message: 'An error occurred', error: err.message });
         });
-});
+
 router.post("/create-user", upload.single("profilePicture"), async (req, res) => {
     try {
       const { username, email, password, bio } = req.body;

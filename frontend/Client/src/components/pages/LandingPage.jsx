@@ -20,6 +20,7 @@ function LandingPage() {
     else{
       Navigate('/profile')
     }
+
   }
   return (
     <div className="relative h-screen">

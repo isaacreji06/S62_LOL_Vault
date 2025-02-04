@@ -38,6 +38,7 @@ const handleFileChange = (e) => {
           } else {
               alert("Signup failed: " + result.error);
           }
+
       } catch (error) {
           console.error("Error submitting form:", error);
           alert("Something went wrong.");

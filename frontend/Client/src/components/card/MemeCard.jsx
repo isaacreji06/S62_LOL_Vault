@@ -19,6 +19,7 @@ function MemeCard() {
   return (
     <div>
       <div className='bg-white h-52 w-44'>
+
         <img src={image} alt="" className='h-32 w-44' />
         {data ? (
           <>
