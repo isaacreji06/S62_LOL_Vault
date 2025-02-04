@@ -30,17 +30,15 @@ const handleFileChange = (e) => {
               method: "POST",
               body: form,
           });
-          let success=false
           const result = await response.json();
           if (response.ok) {
-              success=true
-              alert("Signup successful!");
+            alert("Signup successful!");
+            localStorage.setItem("user", JSON.stringify(result.user));
+              navigate('/profile')
           } else {
               alert("Signup failed: " + result.error);
           }
-          if(success){
-            navigate('/profile')
-          }
+
       } catch (error) {
           console.error("Error submitting form:", error);
           alert("Something went wrong.");

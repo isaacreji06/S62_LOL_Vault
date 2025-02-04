@@ -16,26 +16,38 @@ router.get('/get-user', (req, res) => {
         .catch((err) => {
             res.status(500).json({ message: 'An error occurred', error: err.message });
         });
-});
-router.post('/create-user', upload.single("profilePicture"), async (req, res) => {
+
+router.post("/create-user", upload.single("profilePicture"), async (req, res) => {
     try {
-        // Check if an image was uploaded
-        const profilePictureUrl = req.file
-            ? `http://localhost:8080/uploads/${req.file.filename}`
-            : undefined;
-        const userData = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            bio: req.body.bio,
-            profilePicture: profilePictureUrl || undefined, 
-        });
-        await userData.save();
-        res.status(201).json({ message: 'User added successfully!', user: userData });
-    } catch (error) {
-        res.status(500).json({ message: 'An error occurred', error: error.message });
+      const { username, email, password, bio } = req.body;
+
+      const profilePicture = req.file ? req.file.filename : "";
+  
+      if (!username || !email || !password) {
+        return res.status(400).json({ error: "All fields are required." });
+      }
+      const existingUser = await User.findOne({ 
+        $or: [{ username }, { email }] 
+    });
+
+    if (existingUser) {
+        return res.status(400).json({ error: "Username or Email already exists." });
     }
-});
+  
+      const user = new User({
+        username,
+        email,
+        password,
+        bio,
+        profilePicture,
+      });
+  
+      await user.save();
+      res.status(201).json({ message: "User added successfully!", user });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 router.put('/update-user/:id', (req, res) => {
     const id = req.params.id;

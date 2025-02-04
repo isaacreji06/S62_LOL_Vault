@@ -13,12 +13,19 @@ function LandingPage() {
   const cards = Array.from({ length: 10 });
   const Navigate=useNavigate()
   const handleSignUpButton=()=>{
-    Navigate('/signuppage')
+    const user = localStorage.getItem("user")
+    if (!user){
+      Navigate('/signuppage')
+    }
+    else{
+      Navigate('/profile')
+    }
+
   }
   return (
     <div className="relative h-screen">
       <button className="absolute top-5 right-5 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition" onClick={handleSignUpButton}>
-        Sign Up
+        Profile
       </button>
       <div className="flex flex-col items-center justify-start h-screen pt-10">
           <h1 className="text-4xl font-bold text-black-900">LOL Vault </h1>
