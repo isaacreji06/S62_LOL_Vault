@@ -33,7 +33,7 @@ function Editpage() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/user/update-user/${storedUser._id}`,
+        `https://s62-lol-vault.onrender.com/user/update-user/${storedUser._id}`,
         {
           method: "PUT",
           body: form,
@@ -56,7 +56,7 @@ function Editpage() {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/user/delete-user/${storedUser._id}`,
+        `https://s62-lol-vault.onrender.com/user/delete-user/${storedUser._id}`,
         {
           method: "DELETE",
         }
