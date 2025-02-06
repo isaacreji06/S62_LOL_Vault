@@ -59,7 +59,7 @@ const handleFileChange = (e) => {
                 <input type="password" id="password" onChange={handleChange} value={formData.password} placeholder="Enter your Password" required className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:ring focus:ring-blue-300"/>
                 
                 <label htmlFor="profilePicture" className="block text-sm font-medium text-gray-700">Profile Picture</label>
-                <input type="file" id="profilePicture" onChange={handleFileChange} required className="w-full p-2 border border-gray-300 rounded-lg mb-4"/>
+                <input type="file" id="profilePicture" onChange={handleFileChange} className="w-full p-2 border border-gray-300 rounded-lg mb-4"/>
                 
                 <label htmlFor="bio" className="block text-sm font-medium text-gray-700">Bio</label>
                 <textarea id="bio" onChange={handleChange} value={formData.bio} className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:ring focus:ring-blue-300"></textarea>

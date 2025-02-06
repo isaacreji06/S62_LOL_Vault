@@ -4,6 +4,7 @@ import LandingPage from './components/pages/LandingPage'
 import { Routes,Route } from 'react-router-dom'
 import SignupPage from './components/auth/SignupPage'
 import ProfilePage from './components/pages/ProfilePage'
+import Editpage from './components/pages/editpage'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Route path='/' element={<LandingPage />} />
     <Route path='/signuppage' element={<SignupPage />} />
     <Route path='/profile' element={<ProfilePage />} />
+    <Route path='/editpage' element={<Editpage />} />
     </Routes>
     </div>
   )
