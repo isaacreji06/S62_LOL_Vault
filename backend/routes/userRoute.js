@@ -49,20 +49,23 @@ router.post("/create-user", upload.single("profilePicture"), async (req, res) =>
     }
   });
 
-router.put('/update-user/:id', (req, res) => {
-    const id = req.params.id;
-    const updatedData = req.body;
-    User.findByIdAndUpdate(id, updatedData, { new: true })
-        .then((updatedItem) => {
-            if (!updatedItem) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.status(200).json({ message: 'User data updated successfully', updatedItem });
-        })
-        .catch((err) => {
-            res.status(500).json({ message: 'An error occurred', error: err.message });
-        });
+  router.put('/update-user/:id', upload.single("profilePicture"), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.body;
+        if (req.file) {
+            updatedData.profilePicture = req.file.filename;
+        }
+        const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json({ message: 'User data updated successfully', user: updatedUser });
+    } catch (err) {
+        res.status(500).json({ message: 'An error occurred', error: err.message });
+    }
 });
+
 router.delete('/delete-user/:id', (req, res) => {
     const id = req.params.id;
 

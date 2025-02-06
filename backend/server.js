@@ -1,15 +1,15 @@
 const express = require('express');
 require('dotenv').config({
-    path: '../config/.env',
+    path: './config/.env',
 });
 const mongoose = require('mongoose');
-const User = require('../Schema/userSchema.js');
+const User = require('./Schema/userSchema.js');
 const path=require('path')
 const app = express();
 const cors=require('cors')
 const PORT = process.env.PORT;
 const MONGODB_URL = process.env.MONGODB_URL;
-const userRoute=require('../routes/userRoute.js')
+const userRoute=require('./routes/userRoute.js')
 let databaseStatus = '';
 app.use(cors())
 app.use(express.json());

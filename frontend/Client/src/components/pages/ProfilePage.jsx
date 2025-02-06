@@ -6,16 +6,19 @@ function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
+  const handleEdit=()=>{
+    navigate("/editpage")
+  }
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (!storedUser) {
-      // navigate('/signuppage');
+      navigate('/signuppage');
     } else {
       setUser(storedUser);
       }
   }, [navigate]);
 
-  if (!user) return <p className="text-center text-gray-600">Loading...</p>;  // Show loading state while fetching data
+  if (!user) return <p className="text-center text-gray-600">Loading...</p>;
 console.log(user)
   return (
     <div className="flex flex-col items-center justify-center p-8 rounded-lg bg-gray-100">
@@ -27,7 +30,7 @@ console.log(user)
             className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
           />
         )}
-        <h2 className="text-xl font-semibold">@{user.username}</h2>
+        <h2 className="text-xl font-semibold font-">@{user.username}</h2>
         <p className="text-gray-600">{user.email}</p>
         <p className="mt-2">{user.bio}</p>
         <button
@@ -46,6 +49,12 @@ console.log(user)
           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
         >
           Home
+        </button>
+        <button
+          onClick={handleEdit}
+          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg ml-4 hover:bg-blue-600 transition"
+        >
+          Edit
         </button>
       </div>
     </div>
