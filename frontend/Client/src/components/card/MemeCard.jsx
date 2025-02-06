@@ -6,7 +6,7 @@ function MemeCard() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/get-user')
+    fetch('https://s62-lol-vault.onrender.com/user/get-user')
       .then(response => response.json())
       .then(data => {
         if (data.message) {
