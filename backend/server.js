@@ -14,7 +14,7 @@ let databaseStatus = '';
 app.use(cors())
 app.use(express.json());
 app.use('/user',userRoute)
-app.use('/uploads', express.static(path.join(__dirname, "../uploads")))
+app.use('/uploads', express.static(path.join(__dirname, "./uploads")))
 mongoose
     .connect(MONGODB_URL)
     .then(() => {
