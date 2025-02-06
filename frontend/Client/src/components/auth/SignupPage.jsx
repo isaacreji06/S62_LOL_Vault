@@ -26,7 +26,7 @@ const handleFileChange = (e) => {
         form.append("bio", formData.bio);
         form.append("profilePicture", profilePicture)
         try {
-          const response = await fetch("http://localhost:8080/user/create-user", {
+          const response = await fetch("https://s62-lol-vault.onrender.com/user/create-user", {
               method: "POST",
               body: form,
           });
